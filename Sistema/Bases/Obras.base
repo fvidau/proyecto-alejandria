@@ -1,0 +1,61 @@
+filters:
+  and:
+    - tipo == "obra"
+properties:
+  lectura:
+    displayName: Lectura
+  prioridad:
+    displayName: Prioridad
+views:
+  - type: table
+    name: Todas por ala
+    groupBy:
+      property: ala
+      direction: ASC
+    order:
+      - file.name
+      - autor
+      - tradiciones
+      - lectura
+  - type: table
+    name: Para destilar
+    filters:
+      and:
+        - lectura != "destilada"
+    groupBy:
+      property: prioridad
+      direction: ASC
+    order:
+      - file.name
+      - autor
+      - ala
+      - lectura
+  - type: table
+    name: Destiladas
+    filters:
+      and:
+        - lectura == "destilada"
+    order:
+      - file.name
+      - autor
+      - usada_en
+  - type: table
+    name: Puentes
+    filters:
+      or:
+        - ala == "puente"
+        - "!puente_con.isEmpty()"
+    order:
+      - file.name
+      - autor
+      - ala
+      - puente_con
+  - type: table
+    name: Dominio público
+    filters:
+      and:
+        - dominio_publico == "si"
+    order:
+      - file.name
+      - autor
+      - traductor

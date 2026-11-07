@@ -1,0 +1,37 @@
+filters:
+  and:
+    - tipo == "autor"
+views:
+  - type: table
+    name: Por ala
+    groupBy:
+      property: ala
+      direction: ASC
+    order:
+      - file.name
+      - tradiciones
+      - nacimiento
+      - muerte
+      - origen
+    sort:
+      - property: nacimiento
+        direction: ASC
+  - type: table
+    name: Datos sin verificar
+    filters:
+      and:
+        - datos_verificados == false
+    order:
+      - file.name
+      - nacimiento
+      - muerte
+      - origen
+  - type: table
+    name: Puentes
+    filters:
+      and:
+        - "!puente_con.isEmpty()"
+    order:
+      - file.name
+      - ala
+      - puente_con

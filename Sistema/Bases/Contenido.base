@@ -1,0 +1,46 @@
+filters:
+  or:
+    - tipo == "pieza"
+    - tipo == "idea"
+views:
+  - type: table
+    name: Tablero de piezas
+    filters:
+      and:
+        - tipo == "pieza"
+    groupBy:
+      property: estado
+      direction: ASC
+    order:
+      - file.name
+      - formato
+      - canal
+      - fecha
+      - serie
+  - type: table
+    name: Calendario
+    filters:
+      and:
+        - tipo == "pieza"
+        - "!fecha.isEmpty()"
+    order:
+      - fecha
+      - file.name
+      - formato
+      - estado
+    sort:
+      - property: fecha
+        direction: ASC
+  - type: table
+    name: Banco de ideas
+    filters:
+      and:
+        - tipo == "idea"
+    groupBy:
+      property: etapa
+      direction: ASC
+    order:
+      - file.name
+      - formato_sugerido
+      - fuentes
+      - estado
